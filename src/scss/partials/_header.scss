@@ -1,0 +1,367 @@
+.header {
+  z-index: 10;
+}
+
+.nav-top {
+  display: flex;;
+  justify-content: space-between;
+}
+
+
+.page-sections {
+  font-size: 0;
+  font-weight: 600;
+
+  &__item {
+    display: inline-block;
+    border-left: 1px solid $border;
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: $blue;
+    display: flex;
+
+    &--active {
+      background-color: $blue;
+      color: #fff;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+    }
+
+    &:hover::before {
+      background-color: $blue;
+    }
+  }
+
+  &__link--more {
+    font-weight: 300;
+    color: $font;
+    transform: rotate(-90deg);
+
+    &::before {
+      display: none;
+    }
+
+    &:after {
+      content: '\00AB';
+      font-size: 26px;
+      line-height: 15px;
+    }
+
+    &:hover {
+      color: $input;
+    }
+  }
+
+  &__link--cart {
+    padding-right: 46px;
+
+    &::after {
+      font: 16px/1 'icomoon';
+      content: '\e902';
+      position: absolute;
+      top: 8px;
+      right: 20px;
+    }
+  }
+}
+
+.user-tools {
+
+  @extend .page-sections;
+
+  &__item {
+    display: inline-block;
+    border-left: 1px solid $border;
+
+    &:last-child {
+      background-color: $button;
+    }
+  }
+
+  &__item:last-child:hover > &__link {
+    color: #fff;
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    padding: 5px 18px;
+    font-size: 13px;
+    color: $blue;
+
+    &--lang {
+      color: $font;
+    }
+  }
+}
+
+.dropdown {
+  z-index: 10;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  width: 100%;
+  background-color: #fff;
+
+  &__item {
+    border-top: 1px solid $border;
+  }
+
+  &__link {
+    display: block;
+    padding: 13px 20px 18px;
+    font-size: 13px;
+    color: $blue;
+
+    &:hover {
+      background-color: #f8f8f8;
+    }
+  }
+}
+
+.dropdown-holder {
+  position: relative;
+
+  &__link {
+    position: relative;
+    padding: 5px 30px 5px;
+
+    &::after {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+      content: '\2039';
+      font-size: 20px;
+      font-weight: 300;
+      color: $accord-button;
+      transform: rotate(-90deg);
+    }
+  }
+
+  &:hover > .dropdown {
+    display: block;
+  }
+}
+
+.region {
+  position: relative;
+  padding-left: 37px;
+  font-weight: 300;
+  color: $font;
+
+  &:before {
+    font: 600 16px/1 'icomoon';
+    content: '\e906';
+    position: absolute;
+    top: 8px;
+    left: 15px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .business, .kyivstar {
+    display: none;
+  }
+}
+
+
+.main-nav-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 17px 20px;
+}
+
+.main-logo {
+  float: left;
+  margin-right: 50px;
+
+  &__link {
+    display: block;
+    width: 215px;
+    height: 50px;
+    background: url('../img/logo.svg') no-repeat;
+    background-size: 100%;
+  }
+}
+
+.main-nav {
+  width: 70%;
+  font-size: 0;
+  line-height: 0;
+
+  &__item {
+    display: inline-block;
+    padding: 10px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+    color: $menu;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &--active {
+      color: #fff;
+    }
+  }
+}
+
+.view-more {
+  display: block;
+  transform: rotate(-90deg);
+
+  &::after {
+    content: '\00AB';
+    font-size: 36px;
+    font-weight: 300;
+    color: $menu;
+  }
+}
+
+.flexMenu-viewMore {
+  position: relative;
+  display: inline-block;
+  padding-left: 15px;
+
+  &.active .view-more::after {
+    color: #fff;
+  }
+}
+
+.flexMenu-popup {
+  z-index: 10;
+  top: 25px;
+  left: -10px;
+  width: 200px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 4px 0 $font;
+
+  & li {
+    display: block;
+    padding: 5px;
+  }
+
+  & a {
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: $input;
+  }
+
+  & a:hover {
+    color: $blue;
+  }
+
+  &::after, &::before {
+    position: absolute;
+    content: '';
+  }
+
+  &::after {
+    height: 25px;
+    width: 100%;
+    top: -25px;
+    left: 0;
+  }
+
+  &::before {
+    left: 20px;
+    top: -20px;
+    border: 10px solid transparent;
+    border-top: 10px solid #fff;
+    transform: rotate(180deg);
+  }
+}
+
+.nav-tools {
+  display: flex;
+  align-items: center;
+  font-size: 0;
+
+  &__item {
+    position: relative;
+    text-align: center;
+
+    &:first-child {
+      border-right: 1px solid #fff;
+    }
+  }
+
+  &__link {
+    color: #fff;
+    display: block;
+    height: 30px;
+    width: 70px;
+
+    &--wallet::before {
+      font: 600 28px/30px 'icomoon';
+      content: "\e900";
+    }
+
+    &--search::before {
+      font: 24px/30px 'icomoon';
+      content: "\e909";
+    }
+
+    &:hover {
+      color: $menu;
+    }
+  }
+}
+
+.main-search {
+  display: none;
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+
+  &__input {
+    position: relative;
+    padding: 5px 15px 5px 5px;
+    color: $menu;
+    border-bottom: 3px solid $menu;
+
+    &::placeholder {
+      color: $menu;
+    }
+  }
+
+  &__icon {
+    font: 16px/1 'icomoon';
+    position: absolute;
+    right: 0;
+    top: 5px;
+
+
+    &::after {
+      content: '\e909';
+      color: $menu;
+    }
+  }
+
+  &--opened {
+    display: block;
+  }
+}

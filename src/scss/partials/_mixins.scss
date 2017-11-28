@@ -1,0 +1,12 @@
+@mixin font($fontName, $urlName, $weight, $style: normal) {
+  font-family: '#{$fontName}';
+  src: url('../fonts/#{$urlName}.woff') format('woff'),
+    url('../fonts/#{$urlName}.woff2') format('woff2'),
+    url('../fonts/#{$urlName}.ttf') format('truetype');
+    font-weight: $weight;
+    font-style: $style;
+}
+
+@mixin breakpoint($point, $type: max) {
+  @media screen and (#{$type}-width: #{$point}px) {@content;}
+}

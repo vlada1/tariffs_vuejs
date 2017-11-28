@@ -1,0 +1,270 @@
+.intro {
+  position: relative;
+  margin-bottom: 40px;
+  padding: 103px 0 88px;
+
+  &::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: -84px;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background: url('../img/promo_bg.jpg') no-repeat;
+    background-size: cover;
+  }
+
+  & .content-wrapper {
+      display: flex;
+  }
+
+
+  &__description {
+    width: 60%;
+    margin-right: 50px;
+    color: #fff;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  &__text {
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 40px;
+  }
+
+}
+
+.features-list {
+  display: flex;
+  margin-bottom: 40px;
+
+  &__item {
+    max-width: 160px;
+    padding: 10px 20px;
+    text-align: center;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      position: relative;
+      margin-left: 15px;
+      text-align: right;
+
+      &::before {
+        content: '+';
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        transform: translateY(-50%);
+        font-size: 25px;
+      }
+    }
+  }
+
+  &__item:nth-child(-n+2) {
+    border-right: 1px solid #d8e8f4;
+  }
+
+  &__logo, &__describe,
+  &__speed, &__speed-describe {
+    display: block;
+  }
+
+  &__logo {
+    margin-bottom: 18px;
+    font-size: 28px;
+    line-height: 28px;
+
+    &--video::before {
+      font: 28px/1 'icomoon';
+      content: "\e901";
+    }
+
+    &--hd::before {
+      font: 28px/1 'icomoon';
+      content: "\e907";
+    }
+  }
+
+  &__describe {
+    font-size: 14px;
+    line-height: 17px;
+
+    &--internet {
+      display: inline-block;
+    }
+  }
+
+  &__speed, &__speed-describe {
+    line-height: 17px;
+  }
+
+  &__speed-describe {
+    margin-bottom: 10px;
+  }
+
+}
+
+.internet-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+
+  &__icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,.2);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &:hover > &__message {
+    display: block;
+  }
+
+  &__message {
+    display: none;
+    position: absolute;
+    bottom: 180%;
+    left: -190px;
+    width: 400px;
+    padding: 15px;
+    color: $font;
+    text-align: left;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 0 4px 0 $font;
+
+    & p {
+      margin-bottom: 0;
+    }
+
+    &::after, &::before {
+      position: absolute;
+      content: '';
+    }
+
+    &::after {
+      height: 40px;
+      width: 100%;
+      bottom: -40px;
+      left: 0;
+    }
+
+    &::before {
+      left: 187px;
+      bottom: -20px;
+      border: 10px solid transparent;
+      border-top: 10px solid #fff;
+    }
+  }
+}
+
+.intro-links {
+  &__connect {
+    background-color: $button;
+    border: 2px solid $button;
+    transition: all 0.25s ease-out;
+
+    &:hover {
+      color: #fff;
+      background: none;
+      border: 2px solid #fff;
+    }
+  }
+
+  &__more {
+    position: relative;
+    margin-left: 30px;
+    font-size: 14px;
+  }
+
+  &__more:hover > &__arrow {
+
+
+    &::after {
+      left: 100%;
+      transition: left 0.25s ease-out;
+    }
+
+    &::before {
+      left: 30%;
+      transition: left 0.25s ease-out;
+    }
+  }
+
+  &__arrow {
+    position: relative;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 15px;
+    height: 15px;
+    color: $font;
+    border-radius: 50%;
+    background-color: $button;
+    overflow: hidden;
+
+    &::after, &::before {
+      font: 16px/10px 'icomoon';
+      content: '\203A';
+      position: absolute;
+      top: 0;
+      color: $font;
+
+    }
+
+    &::after {
+      left: 30%;
+    }
+
+    &::before {
+      left: -10px;
+    }
+  }
+}
+
+.circle {
+  position: relative;
+  text-align: center;
+
+  &, &::after {
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    background-color: $button;
+  }
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: #229fff;
+    transform: translate(-50%, -50%);
+
+    & strong {
+      display: block;
+      font-size: 150px;
+      line-height: 150px;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -130%;
+  }
+}

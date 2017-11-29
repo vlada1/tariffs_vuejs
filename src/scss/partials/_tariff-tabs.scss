@@ -10,6 +10,10 @@
   }
 }
 
+#tariff-tabs {
+  box-shadow: 0px 0px 5px 0px rgba(137,143,147,1);
+}
+
 .tariffs-list {
   display: flex;
 
@@ -87,4 +91,222 @@
 
 .speed__count::before {
   content: '\e90a';
+}
+
+.tariff-wrapper {
+  padding: 40px 40px 0;
+}
+
+.tariff-content {
+  display: flex;
+  justify-content: space-between;
+
+  &__plus {
+    align-self: center;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 700;
+  }
+}
+
+.tariff-content-tv {
+  width: 65%;
+
+  &__title {
+    margin-bottom: 15px;
+    padding: 20px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-top: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+
+  &__channels-count {
+    color: $blue;
+  }
+}
+
+.channels-container {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: 20px;
+  padding-right: 15px;
+  max-height: 325px;
+}
+
+.channels-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.ps-container.ps-active-y>.ps-scrollbar-y-rail {
+  width: 10px;
+  opacity: 0.7;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,.1);
+}
+
+.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+  right: 0;
+  width: 10px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.ps-container:hover>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+  background-color: $blue;
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: $blue;
+  border-right: 1px solid rgba(0,0,0,.1);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+
+  &:nth-child(4n) {
+    border-right: none;
+  }
+
+  &__logo {
+    position: relative;
+    display: block;
+    align-self: center;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.6, 0.6);
+      background: url( ../img/vue_block/channels-sprite.png) no-repeat;
+    }
+
+    &--discovery::before {
+      width: 106px;
+      height: 73px;
+      background-position: -219px -353px;
+    }
+
+    &--pershiy-avto::before {
+      width: 73px;
+      height: 73px;
+      background-position: -263px 0;
+    }
+
+    &--pershiy::before {
+      width: 83px;
+      height: 83px;
+      background-position: -747px -938px;
+    }
+
+    &--k1::before {
+      width: 79px;
+      height: 83px;
+      background-position: -753px -415px;
+    }
+
+    &--k2::before {
+      width: 114px;
+      height: 59px;
+      background-position: -630px -506px;
+    }
+  }
+}
+
+.vod-packages {
+  &__title {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.vod-list {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.vod-item {
+  width: 50%;
+  max-width: 300px;
+  box-shadow: 0 0 22px rgba(0,0,0,.14);
+
+  &__head, &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__head {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: $blue;
+  }
+
+  &__body {
+    padding: 10px 20px;
+  }
+
+  &__more {
+    font-size: 14px;
+    color: $discount;
+    border-bottom: 1px dotted $discount;
+  }
+
+  &__price {
+    color: $blue;
+  }
+}
+
+.tariffs-checkbox {
+  position: relative;
+  height: 25px;
+  width: 25px;
+
+  &__check {
+    visibility: hidden;
+  }
+
+  &__check ~ &__custom::after {
+    align-self: center;
+    content: '\e915';
+    font: 11px/1 ks-ico;
+    color: $blue;
+    transition: opacity .15s ease-in-out 0s;
+    opacity: 0;
+  }
+
+  &__check:checked ~ &__custom::after {
+    opacity: 1;
+  }
+
+  &__custom {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border: 1px solid $input;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+}
+
+.tariff-content-internet {
+  width: 30%;
 }

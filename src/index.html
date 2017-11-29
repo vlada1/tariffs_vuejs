@@ -248,40 +248,80 @@
                 <div class="tariff-content-tv">
                   <h3 class="tariff-content-tv__title">
                     Телебачення:
-                    <span class="tariff-content-tv__channels">
+                    <span class="tariff-content-tv__channels-count">
                       {{ activeTariff.channels.length }} каналiв
                     </span>
                   </h3>
 
-                  <div class="channels-container">
-                    <div class="channel" v-for="channel in activeTariff.channels">
-                      <span class="channel__logo"></span>
-                      <span class="channel__title">{{ channel.name }}</span>
+
+                  <!--<div class="channels-wrapper">-->
+                    <div class="channels-container">
+                      <div class="channel" v-for="channel in activeTariff.channels">
+                        <span class="channel__logo" :class="channel.class"></span>
+                        <span class="channel__title">{{ channel.name }}</span>
+                      </div>
                     </div>
-                  </div>
+                  <!--</div>-->
+
 
                   <div class="vod-packages">
                     <h3 class="vod-packages__title">Додатковi канали</h3>
                     <div class="vod-list">
-                      <div class="vod-list__item premium-vod">
+                      <div class="vod-item  premium-vod">
+                        <div class="vod-item__head">
+                          <span class="vod-item__title">{{ additional.premiumVOD.name }}</span>
+                          <label for="check1" class="tariffs-checkbox">
+                            <input type="checkbox" class="tariffs-checkbox__check" id="check1">
+                            <span class="tariffs-checkbox__custom"></span>
+                          </label>
+                        </div>
 
+                        <div class="vod-item__body">
+                          <a href="#" class="vod-item__more">
+                            Деталi
+                          </a>
+                          <span class="vod-item__price">
+                            {{ additional.premiumVOD.price }} грн/мiс.
+                          </span>
+                        </div>
                       </div>
-                      <div class="vod-list__item adult-vod">
+                      <div class="vod-item  adult-vod">
+                        <div class="vod-item__head">
+                          <span class="vod-item__title">{{ additional.adultVOD.name }}</span>
+                          <label for="check2" class="tariffs-checkbox">
+                            <input type="checkbox" class="tariffs-checkbox__check" id="check2">
+                            <span class="tariffs-checkbox__custom"></span>
+                          </label>
+                        </div>
 
+                        <div class="vod-item__body">
+                          <a href="#" class="vod-item__more">
+                            Деталi
+                          </a>
+                          <span class="vod-item__price">
+                            {{ additional.adultVOD.price }} грн/мiс.
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <span class="tariff-content__plus">+</span>
-                <div class="tariff-content-internet"></div>
+
+                <div class="tariff-content-internet">
+                  <h3 class="tariff-content-internet__title">Iнтернет
+                    <div class="sale" v-show="activeTariff.internet.discount">
+                      <span class="sale__text">Акцiя</span>
+                    </div>
+                  </h3>
+                </div>
               </div>
 
             </div>
-
-
           </div>
         </section>
       </main>
     </div>
+
   </body>
 </html>

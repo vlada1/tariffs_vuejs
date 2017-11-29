@@ -57,6 +57,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'kyivstar',
       template: './src/index.html',
+      inject: {
+          default: 'body',
+          entries: {
+              app: 'defer',
+              vendor: 'module',
+              thirdparty: 'head'
+          }
+      }
     }),
   ],
   watchOptions: {

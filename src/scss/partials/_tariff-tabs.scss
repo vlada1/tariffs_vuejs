@@ -1,7 +1,7 @@
 .tariffs {
   max-width: 1130px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 40px 30px 0;
 
   &__title {
     font-size: 2.5rem;
@@ -11,7 +11,8 @@
 }
 
 #tariff-tabs {
-  box-shadow: 0px 0px 5px 0px rgba(137,143,147,1);
+  padding-bottom: 50px;
+  box-shadow: 0 0 5px 0 rgba(137, 143, 147, 1);
 }
 
 .tariffs-list {
@@ -24,10 +25,16 @@
 
   &__tariff.active &__link {
     background-color: #fff;
+    box-shadow: 0 -2px 7px 0 rgba(137, 143, 147, 1);
   }
 
   &__tariff.active .tariff-price {
-    color: $font;
+    color: $fontColor;
+  }
+
+  &__tariff.active .tariff-title {
+    padding-top: 14px;
+    margin-top: -4px;
   }
 
   &__link {
@@ -100,16 +107,10 @@
 .tariff-content {
   display: flex;
   justify-content: space-between;
-
-  &__plus {
-    align-self: center;
-    font-size: 4.5rem;
-    line-height: 1;
-    font-weight: 700;
-  }
 }
 
 .tariff-content-tv {
+  position: relative;
   width: 65%;
 
   &__title {
@@ -117,12 +118,23 @@
     padding: 20px 0;
     font-size: 1.4rem;
     font-weight: 700;
-    border-top: 1px solid rgba(0,0,0,.1);
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
   }
 
   &__channels-count {
     color: $blue;
+  }
+
+  &::after {
+    content: '+';
+    position: absolute;
+    left: 102%;
+    top: 50%;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 700;
+    transform: translateY(-50%);
   }
 }
 
@@ -140,21 +152,21 @@
   margin-bottom: 20px;
 }
 
-.ps-container.ps-active-y>.ps-scrollbar-y-rail {
+.ps-container.ps-active-y > .ps-scrollbar-y-rail {
   width: 10px;
   opacity: 0.7;
   border-radius: 10px;
   background-color: rgba(0,0,0,.1);
 }
 
-.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
   right: 0;
   width: 10px;
   height: 100px;
   border-radius: 10px;
 }
 
-.ps-container:hover>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+.ps-container:hover > .ps-scrollbar-y-rail > .ps-scrollbar-y {
   background-color: $blue;
 }
 
@@ -166,8 +178,8 @@
   text-align: center;
   font-size: 14px;
   color: $blue;
-  border-right: 1px solid rgba(0,0,0,.1);
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-right: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
 
   &:nth-child(4n) {
     border-right: none;
@@ -240,7 +252,7 @@
 .vod-item {
   width: 50%;
   max-width: 300px;
-  box-shadow: 0 0 22px rgba(0,0,0,.14);
+  box-shadow: 0 0 22px rgba(0, 0, 0, .14);
 
   &__head, &__body {
     display: flex;
@@ -308,5 +320,112 @@
 }
 
 .tariff-content-internet {
-  width: 30%;
+  align-self: baseline;
+  width: 28%;
+  box-shadow: 0 0 22px rgba(0, 0, 0, .14);
+
+  &__title {
+    position: relative;
+    margin: 0;
+    padding: 20px;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+    background-color: $blue;
+  }
+}
+
+.sale {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -25px;
+  right: 10px;
+  width: 70px;
+  height: 70px;
+
+  &::before {
+    content: "\e921";
+    font: 4.4rem/1 'ks-ico';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: $discount;
+  }
+
+  &__text {
+    align-self: center;
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+  }
+}
+
+.internet-info {
+  padding: 20px;
+}
+
+.info-title {
+  font-size: 14px;
+  padding: 5px 15px;
+  color: $labelFontColor;
+  background-color: $block-background;
+}
+
+.internet-info-speed {
+  display: flex;
+  color: $blue;
+
+  &__visual {
+    padding: 15px 0;
+  }
+
+  &__count, &__text {
+    display: block;
+  }
+
+  &__count {
+    font-size: 60px;
+    line-height: 1;
+  }
+
+  &__text {
+    font-size: 16px;
+  }
+}
+
+.internet-info-traffic {
+
+  &__visual {
+    display: flex;
+    padding: 20px 10px;
+    font-size: 14px;
+    line-height: 2rem;
+
+    &::before {
+      content: "\e916";
+      font: 2rem/1 'ks-ico';
+      margin-right: 15px;
+      color: $blue;
+    }
+  }
+}
+
+.internet-info-plan {
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__sale {
+    color: #dd1796;
+    border-bottom: 1px dotted #dd1796;
+  }
+
+  &__visual {
+    padding: 20px 10px 0;
+    font-size: 20px;
+  }
 }

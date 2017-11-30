@@ -1,8 +1,11 @@
+'use strict';
+
 const $ = require('jquery');
 const Vue = require('../plugins/vue.js');
 require('../plugins/perfect-scrollbar.jquery');
+require('../plugins/select2.full.min');
+require('../plugins/pickmeup.min');
 
-'use strict';
 
 const tariffs = [
     {
@@ -145,8 +148,8 @@ const activeTariff = tariffs.find((tariff) => {
 });
 
 
-const vm = new Vue({
-    el: '#tariff-tabs',
+new Vue({
+    el: '.content',
     data: {
         tariffs,
         activeTariff,
@@ -190,8 +193,11 @@ const vm = new Vue({
     }
 });
 
-$('.channels-container').perfectScrollbar();
 
+$('.channels-container').perfectScrollbar();
+$('.number-holder__select').select2().on("select2-open", () => {
+    $(this).select2('positionDropdown', true);
+});
 
 
 

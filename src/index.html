@@ -198,7 +198,7 @@
                   :class="{ active: tariff.isActive }">
                 <a href="#" class="tariffs-list__link" :class="{ hd: tariff.isHD }">
                   <div class="tariffs-discount"
-                       v-show="tariff.isHD">
+                       v-if="tariff.isHD">
                     <span class="tariffs-discount__title">HD</span>
                     <img src=<%=require("./img/vue_block/hd.png") %> alt="discount">
                   </div>
@@ -214,7 +214,7 @@
                   </div>
 
                   <ul class="tariff-info">
-                    <li class="tariff-info__item  channels">
+                    <li class="tariff-info__item">
                     <span class="channels__count">
                       <strong class="channels__value  value">{{ tariff.channels.length }}</strong>
                       каналiв
@@ -226,7 +226,7 @@
                         <span class="channels-price__text">грн/мiс.</span>
                       </span>
                     </li>
-                    <li class="tariff-info__item  speed">
+                    <li class="tariff-info__item">
                     <span class="speed__count">
                       <strong class="speed__value  value">{{ tariff.internet.speed }}</strong>
                        Мбіт/сек
@@ -253,21 +253,17 @@
                     </span>
                   </h3>
 
-
-                  <!--<div class="channels-wrapper">-->
-                    <div class="channels-container">
-                      <div class="channel" v-for="channel in activeTariff.channels">
-                        <span class="channel__logo" :class="channel.class"></span>
-                        <span class="channel__title">{{ channel.name }}</span>
-                      </div>
+                  <div class="channels-container">
+                    <div class="channel" v-for="channel in activeTariff.channels">
+                      <span class="channel__logo" :class="channel.class"></span>
+                      <span class="channel__title">{{ channel.name }}</span>
                     </div>
-                  <!--</div>-->
-
+                  </div>
 
                   <div class="vod-packages">
                     <h3 class="vod-packages__title">Додатковi канали</h3>
                     <div class="vod-list">
-                      <div class="vod-item  premium-vod">
+                      <div class="vod-item">
                         <div class="vod-item__head">
                           <span class="vod-item__title">{{ additional.premiumVOD.name }}</span>
                           <label for="check1" class="tariffs-checkbox">
@@ -285,7 +281,7 @@
                           </span>
                         </div>
                       </div>
-                      <div class="vod-item  adult-vod">
+                      <div class="vod-item">
                         <div class="vod-item__head">
                           <span class="vod-item__title">{{ additional.adultVOD.name }}</span>
                           <label for="check2" class="tariffs-checkbox">
@@ -306,21 +302,115 @@
                     </div>
                   </div>
                 </div>
-                <span class="tariff-content__plus">+</span>
 
                 <div class="tariff-content-internet">
                   <h3 class="tariff-content-internet__title">Iнтернет
-                    <div class="sale" v-show="activeTariff.internet.discount">
+                    <div class="sale" v-if="activeTariff.internet.discount">
                       <span class="sale__text">Акцiя</span>
                     </div>
                   </h3>
+                  <div class="internet-info">
+                    <div class="internet-info-speed">
+                      <div class="internet-info-speed__visual">
+                        <span class="internet-info-speed__count">
+                          {{ activeTariff.internet.speed }}
+                        </span>
+                        <span class="internet-info-speed__text">
+                          Мбіт/сек
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="internet-info-traffic">
+                      <div class="internet-info-traffic__title  info-title">Трафiк</div>
+                      <div class="internet-info-traffic__visual">
+                        безмежний
+                      </div>
+                    </div>
+
+                    <div class="internet-info-plan">
+                      <div class="internet-info-plan__title  info-title">
+                        <span class="internet-info-plan__name">
+                          Тapифний план
+                        </span>
+                        <span class="internet-info-plan__sale">
+                          Акцiя
+                        </span>
+                      </div>
+                      <div class="internet-info-plan__visual">
+                        {{ activeTariff.internet.name }}
+                      </div>
+                    </div>
+
                 </div>
               </div>
 
             </div>
           </div>
+          </div>
         </section>
-      </main>
 
+        <section class="request-form-wrapper">
+          <form class="request-form" action="#">
+            <h3 class="request-form__title">Оформлення заявки</h3>
+            <div class="request-fields">
+              <div class="request-fields__column  fields-contacts">
+                <div class="fields-contacts__field">
+                  <label class="fields-contacts__label">Прізвище</label>
+                  <input type="text" class="fields-contacts__input">
+                </div>
+                <div class="fields-contacts__field">
+                  <label class="fields-contacts__label">Ім'я</label>
+                  <input type="text" class="fields-contacts__input">
+                </div>
+                <div class="fields-contacts__field">
+                  <label class="fields-contacts__label">По-батькові</label>
+                  <input type="text" class="fields-contacts__input">
+                </div>
+                <div class="fields-contacts__field  number-holder">
+                  <div class="number-holder__code">
+                    <label class="fields-contacts__label">Код оператора</label>
+                    <select class="number-holder__select">
+                      <option>050</option>
+                      <option>067</option>
+                      <option>073</option>
+                      <option>093</option>
+                      <option>095</option>
+                      <option>097</option>
+                      <option>099</option>
+                    </select>
+                  </div>
+                  <div class="number-holder__number">
+                    <label class="fields-contacts__label">Номер телефону</label>
+                    <input type="tel" class="fields-contacts__input">
+                  </div>
+                </div>
+                <div class="fields-contacts__field">
+                  <label class="fields-contacts__label">Електронна пошта</label>
+                  <input type="email" class="fields-contacts__input">
+                </div>
+              </div>
+
+              <div class="request-fields__column  fields-connection">
+                <div class="fields-connection__field">
+                  <label class="fields-connection__label">
+                    Побажання
+                  </label>
+                  <textarea class="fields-connection__input" maxlength="300"></textarea>
+                  <div class="characters-count">
+                    <span class="characters-count__current"></span>
+                    /
+                    <span class="characters-count__all">300</span>
+                  </div>
+                </div>
+                <div class="fields-connection__field"></div>
+                <div class="fields-connection__field"></div>
+              </div>
+            </div>
+          </form>
+        </section>
+
+      </main>
+    </div>
   </body>
 </html>

@@ -1,0 +1,72 @@
+@font-face {
+  @include font($prFontLight, $prFontLightUrl, 300);
+}
+@font-face {
+  @include font($prFontBold, $prFontBoldUrl, 600);
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ks-ico';
+  src: url('../fonts/icomoon2.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ks-ico' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chevron-up:before {
+  content: "\f077";
+}
+.icon-chevron-down:before {
+  content: "\f078";
+}
+.icon-checked:before {
+  content: "\e915";
+}
+.icon-unlimited:before {
+  content: "\e916";
+}
+.icon-caln:before {
+  content: "\e91f";
+}
+.icon-ks-minus:before {
+  content: "\e93a";
+}
+.icon-ks-plus:before {
+  content: "\e93b";
+}
+.icon-ks-cross:before {
+  content: "\e928";
+}
+.icon-home-internet:before {
+  content: "\e91a";
+}
+.icon-speed:before {
+  content: "\e90a";
+}
+.icon-tv:before {
+  content: "\e90b";
+}
+.icon-banner:before {
+  content: "\e921";
+}

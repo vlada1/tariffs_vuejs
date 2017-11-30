@@ -19,7 +19,6 @@
 
   &__link {
     position: relative;
-    display: block;
     padding: 5px 18px;
     font-size: 13px;
     color: $blue;
@@ -47,7 +46,7 @@
 
   &__link--more {
     font-weight: 300;
-    color: $font;
+    color: $fontColor;
     transform: rotate(-90deg);
 
     &::before {
@@ -87,7 +86,7 @@
     border-left: 1px solid $border;
 
     &:last-child {
-      background-color: $button;
+      background-color: $headButtonColor;
     }
   }
 
@@ -103,7 +102,7 @@
     color: $blue;
 
     &--lang {
-      color: $font;
+      color: $fontColor;
     }
   }
 }
@@ -161,7 +160,7 @@
   position: relative;
   padding-left: 37px;
   font-weight: 300;
-  color: $font;
+  color: $fontColor;
 
   &:before {
     font: 600 16px/1 'icomoon';
@@ -214,7 +213,7 @@
     font-size: 18px;
     line-height: 24px;
     font-weight: 600;
-    color: $menu;
+    color: $menuLinkColor;
 
     &:hover {
       color: #fff;
@@ -234,7 +233,7 @@
     content: '\00AB';
     font-size: 36px;
     font-weight: 300;
-    color: $menu;
+    color: $menuLinkColor;
   }
 }
 
@@ -256,21 +255,21 @@
   padding: 15px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 4px 0 $font;
+  box-shadow: 0 0 4px 0 $fontColor;
 
-  & li {
+  li {
     display: block;
     padding: 5px;
   }
 
-  & a {
+  a {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 600;
     color: $input;
   }
 
-  & a:hover {
+  a:hover {
     color: $blue;
   }
 
@@ -326,7 +325,7 @@
     }
 
     &:hover {
-      color: $menu;
+      color: $menuLinkColor;
     }
   }
 }
@@ -340,11 +339,11 @@
   &__input {
     position: relative;
     padding: 5px 15px 5px 5px;
-    color: $menu;
-    border-bottom: 3px solid $menu;
+    color: $menuLinkColor;
+    border-bottom: 3px solid $menuLinkColor;
 
     &::placeholder {
-      color: $menu;
+      color: $menuLinkColor;
     }
   }
 
@@ -357,7 +356,7 @@
 
     &::after {
       content: '\e909';
-      color: $menu;
+      color: $menuLinkColor;
     }
   }
 

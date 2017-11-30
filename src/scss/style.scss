@@ -1,8 +1,14 @@
+@import './plugins/select2';
+@import './plugins/perfect-scrollbar.min.css';
+@import './plugins/pickmeup';
+
 @import './partials/mixins';
 @import './partials/variables';
+@import './partials/font-face';
 @import './partials/general';
-@import './partials/header.scss';
+@import './partials/header';
 @import './partials/footer';
-@import './partials/intro.scss';
+@import './partials/intro';
 @import './partials/tariff-tabs';
-@import './plugins/perfect-scrollbar.min.css';
+@import './partials/request-form';
+@import './partials/select2-custom';

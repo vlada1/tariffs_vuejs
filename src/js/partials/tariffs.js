@@ -4,7 +4,7 @@ const $ = require('jquery');
 const Vue = require('../plugins/vue.js');
 require('../plugins/perfect-scrollbar.jquery');
 require('../plugins/select2.full.min');
-require('../plugins/pickmeup.min');
+const pickmeup = require('../plugins/pickmeup.min');
 
 
 const tariffs = [
@@ -153,30 +153,40 @@ new Vue({
     data: {
         tariffs,
         activeTariff,
+        suggestInput: '',
         additional:
-            {
-                connectToday: 100,
-                tunerTV: {
-                    name: 'ТВ-тюнер',
-                    price: 39
-                },
-                routerPro: {
-                    name: 'Роутер Pro',
-                    price: 1000
-                },
-                router: {
-                    name: 'Wi-Fi роутер',
-                    price: 300
-                },
-                premiumVOD: {
-                    name: 'Премiальний VOD',
-                    price: 99,
-                },
-                adultVOD: {
-                    name: 'Дорослий',
-                    price: 39
-                }
+        {
+            connectToday: 100,
+            tunerTV: {
+                name: 'ТВ-тюнер',
+                price: 39
             },
+            routerPro: {
+                name: 'Роутер Pro',
+                price: 1000
+            },
+            router: {
+                name: 'Wi-Fi роутер',
+                price: 300
+            },
+            premiumVOD: {
+                name: 'Премiальний VOD',
+                price: 99,
+            },
+            adultVOD: {
+                name: 'Дорослий',
+                price: 39
+            }
+        },
+        requestStep: {
+            connectToday: false,
+            withTuner: false,
+            router: false,
+            routerPro: false,
+            withVod: false,
+            withVod2: false,
+            tunerCounter: 0
+        }
     },
     methods: {
         setActive(tariff) {
@@ -189,6 +199,16 @@ new Vue({
                 $('.channels-container').perfectScrollbar('destroy');
                 $('.channels-container').perfectScrollbar();
             }, 0);
+        },
+        connectToday() {
+            const dateInput = $('.connect-input-holder__input');
+            if (this.requestStep.connectToday) {
+                pickmeup('.connect-input-holder__input').set_date(new Date());
+                dateInput.val(pickmeup('.connect-input-holder__input').get_date(true));
+            } else {
+                dateInput.val('');
+                pickmeup('.connect-input-holder__input').clear();
+            }
         }
     }
 });
@@ -198,6 +218,14 @@ $('.channels-container').perfectScrollbar();
 $('.number-holder__select').select2().on("select2-open", () => {
     $(this).select2('positionDropdown', true);
 });
+
+pickmeup('.connect-input-holder__input', {
+    format: 'Y-m-d',
+    default_date: false,
+    hide_on_select: true,
+    min: new Date()
+});
+
 
 
 

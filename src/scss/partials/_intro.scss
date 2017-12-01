@@ -111,64 +111,6 @@
 
 }
 
-.internet-tooltip {
-  position: relative;
-  display: inline-block;
-  margin-left: 5px;
-  vertical-align: middle;
-
-  &__icon {
-    display: block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,.2);
-    text-align: center;
-    cursor: pointer;
-  }
-
-  &:hover > &__message {
-    display: block;
-  }
-
-  &__message {
-    display: none;
-    position: absolute;
-    bottom: 180%;
-    left: -190px;
-    width: 400px;
-    padding: 15px;
-    color: $fontColor;
-    text-align: left;
-    border-radius: 6px;
-    background-color: #fff;
-    box-shadow: 0 0 4px 0 $fontColor;
-
-    p {
-      margin-bottom: 0;
-    }
-
-    &::after, &::before {
-      position: absolute;
-      content: '';
-    }
-
-    &::after {
-      height: 40px;
-      width: 100%;
-      bottom: -40px;
-      left: 0;
-    }
-
-    &::before {
-      left: 187px;
-      bottom: -20px;
-      border: 10px solid transparent;
-      border-top: 10px solid #fff;
-    }
-  }
-}
-
 .intro-links {
   display: flex;
 

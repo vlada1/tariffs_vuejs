@@ -10,3 +10,13 @@
 @mixin breakpoint($point, $type: max) {
   @media screen and (#{$type}-width: #{$point}px) {@content;}
 }
+
+@mixin formInput() {
+  display: block;
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 14px;
+  font-weight: 300;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 5px;
+}

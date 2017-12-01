@@ -282,43 +282,6 @@
   }
 }
 
-.tariffs-checkbox {
-  position: relative;
-  height: 25px;
-  width: 25px;
-
-  &__check {
-    visibility: hidden;
-  }
-
-  &__check ~ &__custom::after {
-    align-self: center;
-    content: '\e915';
-    font: 11px/1 ks-ico;
-    color: $blue;
-    transition: opacity .15s ease-in-out 0s;
-    opacity: 0;
-  }
-
-  &__check:checked ~ &__custom::after {
-    opacity: 1;
-  }
-
-  &__custom {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    border: 1px solid $input;
-    border-radius: 4px;
-    background-color: #fff;
-  }
-
-}
-
 .tariff-content-internet {
   align-self: baseline;
   width: 28%;

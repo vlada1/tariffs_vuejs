@@ -75,3 +75,110 @@ img {
   color: $fontColor;
   border-radius: 50px;
 }
+
+.page-checkbox {
+  position: relative;
+  height: 25px;
+  width: 25px;
+
+  &__check {
+    visibility: hidden;
+  }
+
+  &__check ~ &__custom::after {
+    align-self: center;
+    content: '\e915';
+    font: 11px/1 ks-ico;
+    color: $blue;
+    transition: opacity .15s ease-in-out 0s;
+    opacity: 0;
+  }
+
+  &__check:checked ~ &__custom::after {
+    opacity: 1;
+  }
+
+  &__custom {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border: 1px solid $input;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    .page-checkbox__check ~ .page-checkbox__custom::after {
+      color: rgba(0,0,0,.4);
+    }
+
+    .page-checkbox__custom {
+      background-color: rgba(0,0,0,.15);
+    }
+  }
+}
+
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+
+  &__icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,.2);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &:hover > &__message {
+    display: block;
+  }
+
+  &__message {
+    z-index: 2;
+    display: none;
+    position: absolute;
+    bottom: 180%;
+    left: -190px;
+    width: 400px;
+    padding: 15px;
+    color: $fontColor;
+    text-align: left;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 0 4px 0 $fontColor;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &::after, &::before {
+      position: absolute;
+      content: '';
+    }
+
+    &::after {
+      height: 40px;
+      width: 100%;
+      bottom: -40px;
+      left: 0;
+    }
+
+    &::before {
+      left: 187px;
+      bottom: -20px;
+      border: 10px solid transparent;
+      border-top: 10px solid #fff;
+    }
+  }
+}

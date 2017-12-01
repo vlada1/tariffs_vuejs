@@ -155,9 +155,9 @@
                   <span class="features-list__speed">100</span>
                   <span class="features-list__speed-describe">до Мбит/с</span>
                   <span class="features-list__describe  features-list__describe--internet">Интернет
-                    <div class="internet-tooltip">
-                      <span class="internet-tooltip__icon">?</span>
-                      <div class="internet-tooltip__message">
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
                         <p>
                           Пакет «Попробуйте ТВ» подключается вместе с услугой Домашний Интернет. Абоненты Домашнего Интернета могут заказать пакет самостоятельно в системе «Мой Киевстар».
                         </p>
@@ -266,9 +266,9 @@
                       <div class="vod-item">
                         <div class="vod-item__head">
                           <span class="vod-item__title">{{ additional.premiumVOD.name }}</span>
-                          <label for="check1" class="tariffs-checkbox">
-                            <input type="checkbox" class="tariffs-checkbox__check" id="check1">
-                            <span class="tariffs-checkbox__custom"></span>
+                          <label class="page-checkbox">
+                            <input type="checkbox" class="page-checkbox__check">
+                            <span class="page-checkbox__custom"></span>
                           </label>
                         </div>
 
@@ -284,9 +284,9 @@
                       <div class="vod-item">
                         <div class="vod-item__head">
                           <span class="vod-item__title">{{ additional.adultVOD.name }}</span>
-                          <label for="check2" class="tariffs-checkbox">
-                            <input type="checkbox" class="tariffs-checkbox__check" id="check2">
-                            <span class="tariffs-checkbox__custom"></span>
+                          <label class="page-checkbox">
+                            <input type="checkbox" class="page-checkbox__check">
+                            <span class="page-checkbox__custom"></span>
                           </label>
                         </div>
 
@@ -396,17 +396,271 @@
                   <label class="fields-connection__label">
                     Побажання
                   </label>
-                  <textarea class="fields-connection__input" maxlength="300"></textarea>
+                  <textarea class="fields-connection__input" maxlength="300"
+                            v-model="suggestInput"></textarea>
                   <div class="characters-count">
-                    <span class="characters-count__current"></span>
+                    <span class="characters-count__current">{{ suggestInput.length }}</span>
                     /
                     <span class="characters-count__all">300</span>
                   </div>
                 </div>
-                <div class="fields-connection__field"></div>
-                <div class="fields-connection__field"></div>
+
+                <div class="address-holder">
+                  <div class="address-holder__street">
+                    <label class="address-holder__label">
+                      Ваша адреса
+                    </label>
+                    <span class="address-holder__text">
+                      Київ, Оболонський проспект, 10
+                      <a href="#" class="address-holder__change">змінити</a>
+                    </span>
+                  </div>
+                  <div class="address-holder__flat">
+                    <label class="address-holder__label">
+                      № квартири
+                    </label>
+                    <input type="text" class="address-holder__input">
+                  </div>
+                </div>
+
+                <div class="connect-date">
+                  <div class="connect-input-holder"
+                       :class="{ 'disabled': requestStep.connectToday }">
+                    <label class="connect-input-holder__label">Оберіть бажану дату підключення</label>
+                    <input type="text" class="connect-input-holder__input">
+                  </div>
+
+                  <div class="connect-date__today">
+                    <label class="page-checkbox  connect-date__check">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.connectToday"
+                             @change="connectToday">
+                      <span class="page-checkbox__custom"></span>
+                      Хочу підключити сьогодні
+                    </label>
+                  </div>
+                  <a href="#" class="connect-date__more">Детальніше</a>
+                </div>
               </div>
             </div>
+
+            <ul class="required-tariffs  list-layout">
+              <li class="required-tariffs__item  list-layout__item">
+                <div class="required-tariffs__image  list-layout__image">
+                  <i class="icon-home-internet"></i>
+                </div>
+                <div class="required-tariffs__data  list-layout__data">
+                  <span class="required-tariffs__title">Домашній Інтернет</span>
+                  <div class="required-tariffs__plan">
+                    <span class="required-tariffs__name">
+                      {{ activeTariff.internet.name }}
+                    </span>
+                    <span class="required-tariffs__speed">
+                        {{ activeTariff.internet.speed }} Мбіт/сек
+                    </span>
+                  </div>
+                </div>
+                <div class="required-tariffs__price  list-layout__price">
+                  <span class="required-tariffs__price-value  list-layout__price-value">
+                    {{ activeTariff.internet.price * (1-activeTariff.internet.sale/100) }}
+                  </span>
+                  грн/міс
+                </div>
+                <div class="required-tariffs__check">
+                  <label class="page-checkbox page-checkbox--disabled">
+                    <input type="checkbox" class="page-checkbox__check" checked>
+                    <span class="page-checkbox__custom"></span>
+                  </label>
+                </div>
+              </li>
+
+              <li class="required-tariffs__item  list-layout__item">
+                <div class="required-tariffs__image  list-layout__image">
+                  <i class="icon-tv"></i>
+                </div>
+                <div class="required-tariffs__data  list-layout__data">
+                  <span class="required-tariffs__title">Домашнє Телебачення</span>
+                  <div class="required-tariffs__plan">
+                    <span class="required-tariffs__name">
+                      {{ activeTariff.name }}
+                    </span>
+                    <span class="required-tariffs__channels">
+                      {{ activeTariff.channels.length }} каналiв
+                    </span>
+                  </div>
+                </div>
+                <div class="required-tariffs__price  list-layout__price">
+                  <span class="required-tariffs__price-value  list-layout__price-value">
+                    {{ activeTariff.tvPrice }}
+                  </span>
+                   грн/міс
+                </div>
+                <div class="required-tariffs__check">
+                  <label class="page-checkbox page-checkbox--disabled">
+                    <input type="checkbox" class="page-checkbox__check" checked>
+                    <span class="page-checkbox__custom"></span>
+                  </label>
+                </div>
+              </li>
+            </ul>
+
+
+            <div class="additional-block">
+              <span class="additional-block__title">Додатково ви можете замовити:</span>
+              <ul class="additional-list  list-layout">
+                <li class="additional-list__tuner  list-layout__item"
+                    :class="{ 'active': requestStep.withTuner }">
+                  <div class="additional-list__image  list-layout__image">
+                    <img src=<%=require("./img/vue_block/img02.png") %> alt="tuner">
+                  </div>
+                  <div class="additional-list__title  list-layout__data">
+                    {{ additional.tunerTV.name }}
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
+                        <p>Відчуйте всі переваги Домашнього Інтернету. Замовляйте «Wi-Fi-роутер», щоб виходити до мережі з кількох пристроїв одночасно в будь-якій частині своєї оселі. + При підключенні послуги покладіть на рахунок 400 грн, а Київстар поверне вам ці кошти протягом 20 місяців у вигляді знижки на абонплату.</p>
+                        <a href="#details" class="info-tooltip__more"><span></span>Детальніше</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="additional-list__price  list-layout__price">
+                  <span class="additional-list__price-value  list-layout__price-value">
+                    {{ additional.tunerTV.price }}
+                  </span>
+                    грн/міс
+                  </div>
+                  <div class="additional-list__check">
+                    <label class="page-checkbox page-checkbox">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.withTuner">
+                      <span class="page-checkbox__custom"></span>
+                    </label>
+                  </div>
+                </li>
+
+                <li class="additional-list__item  list-layout__item"
+                    :class="{ 'active': requestStep.routerPro }">
+                  <div class="additional-list__image  list-layout__image">
+                    <img src=<%=require("./img/vue_block/wifi_pro.png") %> alt="tuner">
+                  </div>
+                  <div class="additional-list__title  list-layout__data">
+                    {{ additional.routerPro.name }}
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
+                        <p>Відчуйте всі переваги Домашнього Інтернету. Замовляйте «Wi-Fi-роутер», щоб виходити до мережі з кількох пристроїв одночасно в будь-якій частині своєї оселі. + При підключенні послуги покладіть на рахунок 400 грн, а Київстар поверне вам ці кошти протягом 20 місяців у вигляді знижки на абонплату.</p>
+                        <a href="#details" class="info-tooltip__more"><span></span>Детальніше</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="additional-list__price  list-layout__price">
+                  <span class="additional-list__price-value  list-layout__price-value">
+                    {{ additional.routerPro.price }}
+                  </span>
+                    грн/міс
+                  </div>
+                  <div class="additional-list__check">
+                    <label class="page-checkbox page-checkbox">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.routerPro">
+                      <span class="page-checkbox__custom"></span>
+                    </label>
+                  </div>
+                </li>
+
+                <li class="additional-list__item  list-layout__item"
+                    :class="{ 'active': requestStep.router }">
+                  <div class="additional-list__image  list-layout__image">
+                    <img src=<%=require("./img/vue_block/router.png") %> alt="tuner">
+                  </div>
+                  <div class="additional-list__title  list-layout__data">
+                    {{ additional.router.name }}
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
+                        <p>Відчуйте всі переваги Домашнього Інтернету. Замовляйте «Wi-Fi-роутер», щоб виходити до мережі з кількох пристроїв одночасно в будь-якій частині своєї оселі. + При підключенні послуги покладіть на рахунок 400 грн, а Київстар поверне вам ці кошти протягом 20 місяців у вигляді знижки на абонплату.</p>
+                        <a href="#details" class="info-tooltip__more"><span></span>Детальніше</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="additional-list__price  list-layout__price">
+                  <span class="additional-list__price-value  list-layout__price-value">
+                    {{ additional.router.price }}
+                  </span>
+                    грн/міс
+                  </div>
+                  <div class="additional-list__check">
+                    <label class="page-checkbox page-checkbox">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.router">
+                      <span class="page-checkbox__custom"></span>
+                    </label>
+                  </div>
+                </li>
+
+                <li class="additional-list__item  list-layout__item"
+                    :class="{ 'active': requestStep.withVod }">
+                  <div class="additional-list__image  list-layout__image">
+                    <img src=<%=require("./img/vue_block/vod.svg") %> alt="tuner">
+                  </div>
+                  <div class="additional-list__title  list-layout__data">
+                    {{ additional.premiumVOD.name }}
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
+                        <p>Відчуйте всі переваги Домашнього Інтернету. Замовляйте «Wi-Fi-роутер», щоб виходити до мережі з кількох пристроїв одночасно в будь-якій частині своєї оселі. + При підключенні послуги покладіть на рахунок 400 грн, а Київстар поверне вам ці кошти протягом 20 місяців у вигляді знижки на абонплату.</p>
+                        <a href="#details" class="info-tooltip__more"><span></span>Детальніше</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="additional-list__price  list-layout__price">
+                  <span class="additional-list__price-value  list-layout__price-value">
+                    {{ additional.premiumVOD.price }}
+                  </span>
+                    грн/міс
+                  </div>
+                  <div class="additional-list__check">
+                    <label class="page-checkbox page-checkbox">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.withVod">
+                      <span class="page-checkbox__custom"></span>
+                    </label>
+                  </div>
+
+                </li>
+                <li class="additional-list__item  list-layout__item"
+                    :class="{ 'active': requestStep.withVod2 }">
+                  <div class="additional-list__image  list-layout__image">
+                    <img src=<%=require("./img/vue_block/vod2.svg") %> alt="tuner">
+                  </div>
+                  <div class="additional-list__title  list-layout__data">
+                    {{ additional.adultVOD.name }}
+                    <div class="info-tooltip">
+                      <span class="info-tooltip__icon">?</span>
+                      <div class="info-tooltip__message">
+                        <p>Відчуйте всі переваги Домашнього Інтернету. Замовляйте «Wi-Fi-роутер», щоб виходити до мережі з кількох пристроїв одночасно в будь-якій частині своєї оселі. + При підключенні послуги покладіть на рахунок 400 грн, а Київстар поверне вам ці кошти протягом 20 місяців у вигляді знижки на абонплату.</p>
+                        <a href="#details" class="info-tooltip__more"><span></span>Детальніше</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="additional-list__price  list-layout__price">
+                  <span class="additional-list__price-value  list-layout__price-value">
+                    {{ additional.adultVOD.price }}
+                  </span>
+                    грн/міс
+                  </div>
+                  <div class="additional-list__check">
+                    <label class="page-checkbox page-checkbox">
+                      <input type="checkbox" class="page-checkbox__check"
+                             v-model="requestStep.withVod2">
+                      <span class="page-checkbox__custom"></span>
+                    </label>
+                  </div>
+
+                </li>
+              </ul>
+            </div>
+
           </form>
         </section>
 

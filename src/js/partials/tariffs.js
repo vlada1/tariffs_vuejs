@@ -5,7 +5,9 @@ const Vue = require('../plugins/vue.js');
 require('../plugins/perfect-scrollbar.jquery');
 require('../plugins/select2.full.min');
 const pickmeup = require('../plugins/pickmeup.min');
+const VeeValidate = require('../plugins/vee-validate');
 
+Vue.use(VeeValidate);
 
 const tariffs = [
     {
@@ -154,12 +156,19 @@ new Vue({
         tariffs,
         activeTariff,
         suggestInput: '',
+        name: '',
+        fatherName: '',
+        lastName: '',
+        phone: null,
+        email: '',
+        flat: '',
         additional:
         {
             connectToday: 100,
             tunerTV: {
                 name: 'ТВ-тюнер',
-                price: 39
+                price: 39,
+                additionalPrice: 69
             },
             routerPro: {
                 name: 'Роутер Pro',
@@ -188,6 +197,41 @@ new Vue({
             tunerCounter: 0
         }
     },
+    computed: {
+        internetPriceWithDiscount() {
+            return this.activeTariff.internet.price * (1-this.activeTariff.internet.sale/100);
+        },
+        monthSum() {
+            let monthSum = this.internetPriceWithDiscount + activeTariff.tvPrice;
+            if (this.requestStep.withTuner) {
+                monthSum += (this.requestStep.tunerCounter + 1) * this.additional.tunerTV.price + this.requestStep.tunerCounter * this.additional.tunerTV.additionalPrice;
+            }
+            if (this.requestStep.withVod) {
+                monthSum += this.additional.premiumVOD.price;
+            }
+            if (this.requestStep.withVod2) {
+                monthSum += this.additional.adultVOD.price;
+            }
+            return monthSum;
+        },
+        totalSum() {
+            let firstMonthSum = this.monthSum;
+            if (this.requestStep.connectToday) {
+                firstMonthSum += 100;
+            }
+            if (this.requestStep.router) {
+                firstMonthSum += this.additional.router.price;
+            }
+            if (this.requestStep.routerPro) {
+                firstMonthSum += this.additional.routerPro.price;
+            }
+            return firstMonthSum;
+        },
+        getCurrentTime() {
+            let date = new Date();
+            return date.getHours() < 15;
+        }
+    },
     methods: {
         setActive(tariff) {
             this.tariffs.forEach((tariff) => {
@@ -209,12 +253,19 @@ new Vue({
                 dateInput.val('');
                 pickmeup('.connect-input-holder__input').clear();
             }
+        },
+        addTuner() {
+            this.requestStep.tunerCounter += 1;
+        },
+        removeTuner() {
+            this.requestStep.tunerCounter -= 1;
         }
     }
 });
 
 
 $('.channels-container').perfectScrollbar();
+
 $('.number-holder__select').select2().on("select2-open", () => {
     $(this).select2('positionDropdown', true);
 });
